@@ -1,0 +1,75 @@
+${header_init}
+package ${root}.${package}.${module}.domain;
+
+import ${root}.shared.domain.AggregateRoot;
+import ${root}.${package}.${module}.domain.*;
+
+import java.util.UUID;
+
+public class ${entity} extends AggregateRoot {
+
+  public ${entity} () {
+  }
+
+${header_end}
+
+
+${body_vo_properties_init}
+  private ${propType} ${propName};
+${body_vo_properties_end}
+
+
+# Removed per-field constructor-args/props blocks; use ${cargs} and ${cprops} composites instead
+
+
+${body_constructors_init}
+
+  public ${entity} (${cargs}) {
+${cprops}
+  }
+
+  public ${entity} (${entity}Id id) {
+    this.id = id;
+  }
+
+${body_constructors_end}
+
+
+${body_creators_init}
+
+    public static ${entity} create(${cargs}) {
+
+        ${entity} ${instance} = new ${entity}(${cvalues});
+
+        // create and register ${instance}CreatedEvent
+
+        return ${instance};
+    }
+
+    public static ${entity} create(UUID id) {
+        ${entity} ${instance} = new ${entity}(${entity}Id.create(id));
+
+        // create and register ${instance}CreatedEvent
+
+        return ${instance};
+    }
+
+${body_creators_end}
+
+
+${body_setters_getters_init}
+
+  public ${propType} ${propName} () { 
+    return this.${propName};
+  }
+
+  public void set${propNameCap} (${propType} ${propName}) {
+    this.${propName} = ${propName};
+  }
+
+${body_setters_getters_end}
+
+
+${footer_init}
+}
+${footer_end}
